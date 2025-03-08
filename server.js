@@ -1,15 +1,15 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
-app.use(express.json())
-
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
-app.use(bodyParser.json())
-
+const dotEnv = require("dotenv")
 const recipeRoutes = require("./routes/recipeRoutes")
 
-const dotEnv = require("dotenv")
+app.use(express.json())
+app.use(cors())
+app.use(bodyParser.json())
+
 dotEnv.config()
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
@@ -19,11 +19,9 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(`${error}`)
 })
 
-app.use(cors())
-
 app.use("/recipes", recipeRoutes)
 
-const port = process.env.port || 6000
+const port = process.env.PORT || 6000
 
 app.listen(port, () => {
     console.log(`Server started and running successfully at port ${port}`)
