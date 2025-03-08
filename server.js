@@ -18,6 +18,8 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(`${error}`)
 })
 
+app.use(cors())
+
 app.use("/recipes", recipeRoutes)
 
 const port = process.env.port || 6000
