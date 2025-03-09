@@ -4,9 +4,9 @@ const Recipe = require("../models/Recipe")
 
 const createRecipe = async (request, response) => {
     try{
-        const {title, ingredients, instructions, categories} = request.body
+        const {title, imageUrl, ingredients, instructions, categories, readyIn} = request.body
         const recipe = new Recipe({
-            title, ingredients, instructions, categories
+            title, imageUrl, ingredients, instructions, categories, readyIn
         })
         await recipe.save()
         response.status(201).json(recipe)
